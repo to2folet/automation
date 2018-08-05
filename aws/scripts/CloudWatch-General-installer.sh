@@ -52,3 +52,5 @@ cat <<EOF >/etc/cron.d/CloudWatch-General-job
 
 
 EOF
+
+sudo service cron restart

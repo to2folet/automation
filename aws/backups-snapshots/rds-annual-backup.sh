@@ -78,6 +78,19 @@ function cleaning_logs() {
     fi
 }
 
+function copy_cronjob() {
+  LOCATION_OF_CRONJOB_ORIGINAL="/scripts/aws-scripts/rds-backup-job"
+  LOCATION_OF_CRONJOB_DESTINATION="/etc/cron.d/rds-backup-job"
+
+  # we would like to copy the cronjob file into
+  # into /etc/cron.d/ directory if the file doesnt exist
+  if [ ! -f "$LOCATION_OF_CRONJOB_DESTINATION" ]; then
+      $(command -v cp) "$LOCATION_OF_CRONJOB_ORIGINAL" "$LOCATION_OF_CRONJOB_DESTINATION" > /dev/null 2>&1 &
+      $(command -v service) cron restart > /dev/null 2>&1 &
+  fi
+}
+
+
 function upgrade_of_CLI() {
     # upgrading of AWS Command Line Interface
     # http://docs.aws.amazon.com/cli/latest/userguide/installing.html
@@ -126,6 +139,8 @@ _ec2_instance_verification_BackupInstance
 # Following condition will allow to run this script only from Central Unit Maintenance Server - BackupInstance
 if [[ $EC2_BackupInstance_VERIFICATION =~ .*i-.* ]]; then
 
+    copy_cronjob
+    
     cleaning_logs
 
     upgrade_of_CLI

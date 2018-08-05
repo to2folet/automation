@@ -1,0 +1,12 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+
+# location of script
+# /scripts/instance-info.sh
+
+# location of cronjob
+# /etc/cron.d/instance-info-job
+
+# EC2 metadata 
+@reboot root nohup /scripts/instance-info.sh > /dev/null 2>&1 &
+@reboot root sleep 900 && > /var/log/instance.info
+

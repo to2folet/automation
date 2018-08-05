@@ -168,6 +168,18 @@ function log() {
     echo "[$(date +%Y-%m-%d-%T)]: $*"
 }
 
+function copy_cronjob() {
+  LOCATION_OF_CRONJOB_ORIGINAL="/scripts/aws-scripts/ebs-general-backup.sh"
+  LOCATION_OF_CRONJOB_DESTINATION="/etc/cron.d/ebs-general-backup.sh"
+
+  # we would like to copy the cronjob file into
+  # into /etc/cron.d/ directory if the file doesnt exist
+  if [ ! -f "$LOCATION_OF_CRONJOB_DESTINATION" ]; then
+      $(command -v cp) "$LOCATION_OF_CRONJOB_ORIGINAL" "$LOCATION_OF_CRONJOB_DESTINATION" > /dev/null 2>&1 &
+      $(command -v service) cron restart > /dev/null 2>&1 &
+  fi
+}
+
 function press_enter() {
     echo ""
     echo -n "Press Enter to continue"
@@ -699,6 +711,7 @@ _ec2_instance_verification_BackupInstance
 
 # Following condition will allow to run this script only from Central Unit Maintenance Server - BackupInstance
 if [[ $EC2_BackupInstance_VERIFICATION =~ .*i-.* ]]; then
+	copy_cronjob
 	# condition which will check if the argument was set
 	if [ "$#" -eq 0 ]; then
 	    clear

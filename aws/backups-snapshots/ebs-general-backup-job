@@ -1,0 +1,28 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+
+# The script contains description and explanation of arguments
+# /scripts/aws-scripts/ebs-general-backup.sh
+
+#### SNAPSHOTS
+# Production ENV daily EBS snapshot - every day at 11pm (except Sunday)
+00 23 * * 1-6 root /scripts/aws-scripts/ebs-general-backup.sh auto_ebs_snapshot_daily 2> /var/log/aws_backup-stderr.log >> /var/log/aws_backup-stdout.log
+
+# Production ENV weekly EBS snapshot - every Sunday at 11pm 
+00 23 * * 0 root /scripts/aws-scripts/ebs-general-backup.sh auto_ebs_snapshot_weekly 2> /var/log/aws_backup-stderr.log >> /var/log/aws_backup-stdout.log
+
+# Production ENV monthly EBS snapshot - 1st of each month at 01am
+00 01 01 * * root /scripts/aws-scripts/ebs-general-backup.sh auto_ebs_snapshot_monthly 2> /var/log/aws_backup-stderr.log >> /var/log/aws_backup-stdout.log
+
+# Production ENV daily EBS snapshot - 1st of January each year at midnight
+00 00 01 01 * root /scripts/aws-scripts/ebs-general-backup.sh auto_ebs_snapshot_annually 2> /var/log/aws_backup-stderr.log >> /var/log/aws_backup-stdout.log
+
+#### CLEANING OF SNAPSHOTS
+# Production ENV daily EBS snapshot - every day at 03am (except Sunday)
+00 03 * * 1-6 root /scripts/aws-scripts/ebs-general-backup.sh auto_ebs_snapshot_cleaner_daily 2> /var/log/aws_backup-stderr.log >> /var/log/aws_backup-stdout.log
+
+# Production ENV weekly EBS snapshot - every Sunday at 04am 
+00 04 * * 0 root /scripts/aws-scripts/ebs-general-backup.sh auto_ebs_snapshot_cleaner_weekly 2> /var/log/aws_backup-stderr.log >> /var/log/aws_backup-stdout.log
+
+# Production ENV monthly EBS snapshot - 1st of each month at 05am
+00 05 01 * * root /scripts/aws-scripts/ebs-general-backup.sh auto_ebs_snapshot_cleaner_monthly 2> /var/log/aws_backup-stderr.log >> /var/log/aws_backup-stdout.log
+

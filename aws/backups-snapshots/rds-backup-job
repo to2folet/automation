@@ -1,0 +1,17 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+
+# RDS snapshot script, which will create snapshot of production DB clusters,
+# Monthly production RDS backup first day of month at 03:25am
+# Annual production RDS backup 1st of January at 04:45am
+
+# ** location of script
+# $ /scripts/aws-scripts/rds-monthly-backup.sh
+# $ /scripts/aws-scripts/rds-annual-backup.sh
+
+# ** location of cronjob
+# $ /etc/cron.d/rds-backup-job
+
+25 03 1 * * root /scripts/aws-scripts/rds-monthly-backup.sh 2> /var/log/aws_rds_snapshot-stderr.log >> /var/log/aws_rds_snapshot-stdout.log &
+
+45 04 1 1 * root /scripts/aws-scripts/rds-annual-backup.sh 2> /var/log/aws_rds_snapshot-stderr.log >> /var/log/aws_rds_snapshot-stdout.log &
+
