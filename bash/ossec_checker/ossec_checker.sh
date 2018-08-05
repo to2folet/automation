@@ -23,7 +23,7 @@ copy_cronjob() {
   LOCATION_OF_CRONJOB_ORIGINAL="/scripts/ossec_checker/ossec_checker-job"
   LOCATION_OF_CRONJOB_DESTINATION="/etc/cron.d/ossec_checker-job"
 
-  # we would like to copy the cronjob file into
+  # we would like to copy the cronjob file
   # into /etc/cron.d/ directory if the file doesnt exist
   if [ ! -f "$LOCATION_OF_CRONJOB_DESTINATION" ]; then
       $(command -v cp) "$LOCATION_OF_CRONJOB_ORIGINAL" "$LOCATION_OF_CRONJOB_DESTINATION" > /dev/null 2>&1 &

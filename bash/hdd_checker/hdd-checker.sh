@@ -11,7 +11,7 @@
 ## /etc/cron.d/hdd-checker-job
 ## /scripts/hdd_checker/hdd-checker-job
 
-copy_cron() {
+copy_cronjob() {
   LOCATION_OF_CRONJOB_ORIGINAL="/scripts/hdd_checker/hdd-checker-job"
   LOCATION_OF_CRONJOB_DESTINATION="/etc/cron.d/hdd-checker-job"
 
@@ -38,5 +38,5 @@ hdd_check() {
   done
 }
 
-copy_cron
+copy_cronjob
 hdd_check

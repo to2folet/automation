@@ -86,6 +86,18 @@ This conflict has to be fixed asap.
     done < "$SITESFILE"
 }
 
+function copy_cronjob() {
+  LOCATION_OF_CRONJOB_ORIGINAL="/scripts/website_checker/website_bash_monitoring-job"
+  LOCATION_OF_CRONJOB_DESTINATION="/etc/cron.d/website_bash_monitoring-job"
+
+  # we would like to copy the cronjob file
+  # into /etc/cron.d/ directory if the file doesnt exist
+  if [ ! -f "$LOCATION_OF_CRONJOB_DESTINATION" ]; then
+      $(command -v cp) "$LOCATION_OF_CRONJOB_ORIGINAL" "$LOCATION_OF_CRONJOB_DESTINATION" > /dev/null 2>&1 &
+      $(command -v service) cron restart > /dev/null 2>&1 &
+  fi
+}
+
 function general_website_monitoring() {
     # list the sites we want to monitor in this file
     SITESFILE="/scripts/website_checker/website_bash_monitoring-list.txt"
@@ -107,6 +119,8 @@ function hipchat_cli() {
         git clone https://github.com/hipchat/hipchat-cli.git $HIPCHAT_DIR > /dev/null
     fi
 }
+
+copy_cronjob
 
 # Install HipChat CLI
 hipchat_cli
