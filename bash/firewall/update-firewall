@@ -1,0 +1,3 @@
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+* * * * * root /usr/local/bin/run-emerging-threats.sh
+0 22 * * * root /usr/local/bin/update-pingdom-ips.sh
