@@ -1,0 +1,15 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+
+# location of Website Monitoring Script
+## /scripts/website_checker/website_bash_monitoring.sh
+
+# location of cron
+## /etc/cron.d/website_bash_monitoring-job
+## /scripts/website_checker/website_bash_monitoring-job
+
+# location of the HOST list
+## /scripts/website_checker/website_bash_monitoring-list.txt
+
+# every 30minutes
+*/30 * * * * root /scripts/website_checker/website_bash_monitoring.sh
+
