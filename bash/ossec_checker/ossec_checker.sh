@@ -19,14 +19,12 @@ EMAIL_RECIPIENT=<paste_email_address>
 HOST=$(hostname)
 
 # to check running OSSEC service
-"$SERVICE_OSSEC_PATH" status | grep "is running" > /dev/null
-if [[ $? -eq 0 ]]; then
-    echo "OSSEC is running"
+if "$SERVICE_OSSEC_PATH" status | grep "is running" > /dev/null; then
+    echo "OSSEC service is running"
 else
     "$SERVICE_OSSEC_PATH" start
     sleep 15s
-    "$SERVICE_OSSEC_PATH" status | grep "is running" > /dev/null
-    if [[ $? -eq 0 ]]; then
+    if "$SERVICE_OSSEC_PATH" status | grep "is running" > /dev/null; then
         echo "On $HOST -> service $SERVICE_OSSEC_PATH WAS succesfully started by the $LOCATION_SCRIPT . This action was also recorded into $LOCATION_LOG "| mail -s "$SERVICE_OSSEC_PATH on $HOST was started" -a "From: $HOST@domain.net" "$EMAIL_RECIPIENT"
         logger "OSSEC service WAS succesfully started"
     else
