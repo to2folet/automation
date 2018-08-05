@@ -1,0 +1,12 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+
+# location of script 
+## /scripts/hdd_checker/hdd-checker.sh
+
+# location of cron
+## /etc/cron.d/hdd-checker-job
+## /scripts/hdd_checker/hdd-checker-job
+
+# every minute - General script
+* * * * * root /scripts/hdd_checker/hdd-checker.sh
+
