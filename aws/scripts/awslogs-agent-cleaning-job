@@ -1,0 +1,13 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+
+# location
+#
+## Script
+## /etc/CloudWatch/awslogs/awslogs-agent-setup.py
+#
+## cron
+## /etc/cron.d/awslogs-agent-cleaning-job
+
+# Cleaning of logfile of AWS CloudWatch 
+*/5 * * * * root > /var/log/awslogs.log
+
