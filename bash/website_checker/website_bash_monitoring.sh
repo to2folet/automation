@@ -12,9 +12,6 @@ Description:
 ################
 COMMENT
 
-
-TIME=$(date "+.%Y%m%d-%H%M%S")
-DATE=$(date +%Y-%m-%d-%T)
 HOST=$(hostname)
 
 MAIL_PATH="/usr/bin/mail"
@@ -27,22 +24,21 @@ EMAIL_RECEPIENTS="<email@domain.net>, <email2@domain.net>"
 
 INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id)
 AZ=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | grep "availabilityZone" | awk -F\" '{print $4}')
-EC2_HOST=$(curl http://169.254.169.254/latest/meta-data/local-hostname | cut -d '.' -f1)
 DEPLOYMENT_LOG=$(tail -1 /var/log/deployments.txt)
 
 function _hipchat_notification() {
-    $HIPCHAT_CLI_FILE -v v2 -t $HIPCHAT_TOKEN -r $HIPCHAT_ROOM_ID -l critical -n -c red -i "$MESSAGE_hipchat"
+    $HIPCHAT_CLI_FILE -v v2 -t "$HIPCHAT_TOKEN" -r "$HIPCHAT_ROOM_ID" -l critical -n -c red -i "$MESSAGE_hipchat"
 }
 
 function _email_notification() {
     SUBJECT="$FAMILY - check of $site FAILED"
-    echo "$MESSAGE_email" | $MAIL_PATH -s "$SUBJECT" -a "From: $FAMILY@ec2-hostname.net" $EMAIL
+    echo "$MESSAGE_email" | $MAIL_PATH -s "$SUBJECT" -a "From: $FAMILY@ec2-hostname.net" "$EMAIL"
 }
 
 function _website_check() {
     while read -r site; do
     
-        WEBSITE=$(awk '{print $1}' <<< $site)
+        WEBSITE=$(awk '{print $1}' <<< "$site")
         if [ ! -z "${site}" ]; then
             CURL=$($CURL_PATH -is -k --head "$WEBSITE")
             if echo "$CURL" | grep "200 OK" > /dev/null
@@ -79,7 +75,7 @@ This conflict has to be fixed asap.
     <b>AWS AZ</b>: <i>$AZ</i>
     <b>Deployment Log</b>: <i>$DEPLOYMENT_LOG</i>
 "
-                for EMAIL in $(echo $EMAIL_RECEPIENTS | tr "," " "); do
+                for EMAIL in $(echo "$EMAIL_RECEPIENTS" | tr "," " "); do
                     _email_notification
                     echo "$SUBJECT"
                     echo "Alert sent to $EMAIL"
@@ -87,7 +83,7 @@ This conflict has to be fixed asap.
                 _hipchat_notification
             fi
         fi
-    done < $SITESFILE
+    done < "$SITESFILE"
 }
 
 function general_website_monitoring() {
