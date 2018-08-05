@@ -1,7 +1,8 @@
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 
 # location
-# /scripts/ossec_checker.sh
+# /scripts/ossec_checker/ossec_checker.sh
+# /scripts/ossec_checker/ossec_checker-job
 # /etc/cron.d/ossec_checker-job
 
 # Script is running by cron every 5 min
@@ -12,5 +13,4 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 # and write record to the /var/log/syslog
 
 
-*/5 * * * * root /scripts/ossec_checker.sh
-
+*/5 * * * * root /scripts/ossec_checker/ossec_checker.sh
