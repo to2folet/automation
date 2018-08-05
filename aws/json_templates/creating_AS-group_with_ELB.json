@@ -1,0 +1,66 @@
+{
+    "AutoScalingGroupName": "Production_Service_Master01",
+    "LaunchConfigurationName": "Master-Slave_production_v10",
+    "MinSize": 1,
+    "MaxSize": 1,
+    "DesiredCapacity": 1,
+    "DefaultCooldown": 600,
+    "AvailabilityZones": [
+        "us-east-1c",
+        "us-east-1d",
+        "us-east-1e",
+        "us-east-1f"
+    ],
+    "LoadBalancerNames": [
+        "Cast-VPC"
+    ],
+    "HealthCheckType": "ELB",
+    "HealthCheckGracePeriod": 600,
+    "VPCZoneIdentifier": "subnet-XXXXX,subnet-XXXXX,subnet-XXXXX,subnet-XXXXX",
+    "Tags": [
+        {
+            "ResourceType": "auto-scaling-group",
+            "ResourceId": "Production_Service_Master01",
+            "PropagateAtLaunch": true,
+            "Value": "Production Service - Master | AutoScaling",
+            "Key": "Name"
+        },
+        {
+            "ResourceType": "auto-scaling-group",
+            "ResourceId": "Production_Service_Master01",
+            "PropagateAtLaunch": true,
+            "Value": "us-east-1",
+            "Key": "Region"
+        },
+        {
+            "ResourceType": "auto-scaling-group",
+            "ResourceId": "Production_Service_Master01",
+            "PropagateAtLaunch": true,
+            "Value": "Production",
+            "Key": "Stack"
+        },
+        {
+            "ResourceType": "auto-scaling-group",
+            "ResourceId": "Production_Service_Master01",
+            "PropagateAtLaunch": true,
+            "Value": "u2022",
+            "Key": "SSL_Cert"
+        },        
+        {
+            "ResourceType": "auto-scaling-group",
+            "ResourceId": "Production_Service_Master01",
+            "PropagateAtLaunch": true,
+            "Value": "Private",
+            "Key": "Subnet"
+        }
+    ],
+    "TerminationPolicies": [
+        "OldestInstance",
+        "OldestLaunchConfiguration",
+        "ClosestToNextInstanceHour",
+        "NewestInstance",
+        "Default"
+    ],
+    "NewInstancesProtectedFromScaleIn": false,
+    "ServiceLinkedRoleARN": "arn:aws:iam::XXXXX:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
+}

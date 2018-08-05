@@ -1,0 +1,34 @@
+## Creating a JSON templates:
+### Generate CLI Skeleton for AS Group
+aws --region us-east-1 autoscaling create-auto-scaling-group --generate-cli-skeleton
+
+### Generate CLI Skeleton for put-scheduled-update-group-action
+aws --region us-east-1 autoscaling put-scheduled-update-group-action --generate-cli-skeleton
+
+
+
+
+## Create a resource based on the CLI Skeleten template
+### Creating AS Group
+sudo vi creating_AS-group.json && aws --region us-east-1 autoscaling create-auto-scaling-group --cli-input-json file://creating_AS-group.json
+
+
+## Describe AWS resource
+### Describe AS Scheduled Actions
+aws --region us-east-1 autoscaling describe-scheduled-actions --auto-scaling-group-name <Name_of_AS_Group>
+
+
+
+
+
+aws --region us-east-1 autoscaling describe-scheduled-actions --auto-scaling-group-name <name_of_AS_group> --generate-cli-skeleton
+
+
+aws --region us-east-1 autoscaling create-auto-scaling-group --generate-cli-skeleton
+
+
+## Describe AS Scheduled Actions
+aws --region us-east-1 autoscaling describe-scheduled-actions --auto-scaling-group-name <Name_of_AS_Group>
+
+## Generate CLI Skeleton for put-scheduled-update-group-action
+aws --region us-east-1 autoscaling put-scheduled-update-group-action --generate-cli-skeleton
