@@ -32,7 +32,6 @@ create_dev() {
 }
 
 # create a user for <DEVELOPER> if it doesn't already exist
-/bin/grep -E "^$DEVELOPER" /etc/passwd
 if /bin/grep -E "^$DEVELOPER" /etc/passwd; then
   echo "A user account already exists for $DEVELOPER, skipping creation"
 else
