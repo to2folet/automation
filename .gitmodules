@@ -1,3 +1,6 @@
 [submodule "aws/aws-shell"]
 	path = aws/aws-shell
 	url = https://github.com/awslabs/aws-shell
+[submodule "bash/ssh/31deaf857521319fcba8ee9f7af47299"]
+	path = bash/ssh/31deaf857521319fcba8ee9f7af47299
+	url = https://gist.github.com/JoaquimLey/31deaf857521319fcba8ee9f7af47299
