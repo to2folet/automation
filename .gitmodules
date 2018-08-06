@@ -1,0 +1,3 @@
+[submodule "aws/aws-shell"]
+	path = aws/aws-shell
+	url = https://github.com/awslabs/aws-shell
