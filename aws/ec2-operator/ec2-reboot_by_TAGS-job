@@ -1,0 +1,11 @@
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+MAILTO=root
+HOME=/
+
+# location 
+# /etc/cron.d/ec2-reboot_scripting-job
+
+# Reboot instances
+00 02 * * * /bin/bash -c /scripts/aws-scripts/ec2-reboot_scripting.sh
+
