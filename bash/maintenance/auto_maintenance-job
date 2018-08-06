@@ -1,0 +1,18 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+
+# Auto maintenance crontab JOB for staging ENV
+
+# location
+## SCRIPT
+## /scripts/maintenance/auto_maintenance_staging.sh
+
+## CRONtab JOB
+## /etc/cron.d/auto_maintenance_staging-job
+
+## LOG (only at the Staging Servers)
+## /var/log/auto_maintenance_staging.log
+
+# every evening at 05:00 pm - Staging  
+00 17 * * * root /scripts/maintenance/auto_maintenance_staging.sh 2>/var/log/auto_maintenance_staging.log
+
+

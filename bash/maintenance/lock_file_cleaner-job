@@ -1,0 +1,17 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+
+# Cleaning script for ADMIN UI
+
+# location
+## SCRIPT
+## /scripts/lock_file_cleaner.sh
+
+## CRONtab JOB
+## /etc/cron.d/lock_file_cleaner-job
+
+## LOG (only at the Scripting Servers)
+## /var/log/lock_file_cleaner.log
+
+
+0 */1 * * * root /scripts/lock_file_cleaner.sh
+

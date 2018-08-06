@@ -1,0 +1,5 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+
+*/10 * * * * root /scripts/chrome_killer.sh
+
+# 5 0 * * * ps -ef | grep chrome | grep -v grep | awk '{print $2}' | xargs sudo kill -9
