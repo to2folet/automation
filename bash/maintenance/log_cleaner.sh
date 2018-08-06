@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function _auto_cleaning {
+function auto_cleaning {
     # to clean /tmp directory - to clean files which are older than 1 day
     find /tmp -ctime +1 -exec rm -rf {} +
     echo "/tmp was cleaned from files which were older than 1 day"
@@ -44,4 +44,4 @@ function _auto_cleaning {
 
 }
 
-_auto_cleaning
+auto_cleaning

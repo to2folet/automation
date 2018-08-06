@@ -14,7 +14,7 @@
 
 
 ADMIN_UI_location="/var/www/html/admin"
-LOCK_FILE_LOCATION="/var/www/html/admin/tmp/process_new_lock"
+LOCK_FILE_LOCATION="$ADMIN_UI_location/tmp/process_new_lock"
 
 HOST=$(hostname)
 DATE=$(date +%Y-%m-%d-%T)
